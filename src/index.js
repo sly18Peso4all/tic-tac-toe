@@ -115,8 +115,9 @@ import './index.css';
       const winner = calculateWinner(current.squares);
 
       const moves = history.map((step, move) => {
-        const desc = move ? 'Go to move #' + move :
-                       'Go to game start';
+        const desc = move 
+        ? "Go to move #" + move + " @ " + history[move].location
+        : 'Go to game start';
            return (
              <li key={move}>
                 <button onClick={() => this.jumpTo(move)}>
@@ -141,7 +142,8 @@ import './index.css';
             <Board 
                winningSquares={winner ? winner.line : []}
                squares={current.squares} 
-               onClick={i => this.handleClick(i)}/>
+               onClick={i => this.handleClick(i)}
+               />
           </div>
           <div className="game-info">
             <div>{ status }</div>
@@ -179,7 +181,7 @@ import './index.css';
       const [a,b,c] = lines[i]
 
       if (squares[a] && squares[a] === squares[b] && squares[b] === squares[c]) {
-        return squares[a]
+        return { player: squares[a], line: [a, b, c] };
       }
     }
 
